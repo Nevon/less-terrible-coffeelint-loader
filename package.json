@@ -1,8 +1,8 @@
 {
-  "name": "coffeelint-loader",
-  "version": "0.2.0",
-  "author": "Scott Beck @bline",
-  "description": "coffeelint loader module for webpack",
+  "name": "less-terrible-coffeelint-loader",
+  "version": "0.1.0",
+  "author": "Tommy Brunn <tommy.brunn@gmail.com",
+  "description": "Coffeelint loader module for webpack",
   "dependencies": {
     "chalk": "^1.1.1",
     "loader-utils": "0.2.x",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:bline/coffeelint-loader.git"
+    "url": "git@github.com:Nevon/less-terrible-coffeelint-loader.git"
   },
   "licenses": [
     {
