@@ -1,0 +1,26 @@
+{
+  "name": "coffeelint-loader",
+  "version": "0.2.0",
+  "author": "Scott Beck @bline",
+  "description": "coffeelint loader module for webpack",
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "loader-utils": "0.2.x",
+    "rcfinder": "^0.1.8",
+    "strip-json-comments": "1.0.x",
+    "text-table": "^0.2.0"
+  },
+  "peerDependencies": {
+    "coffeelint": "^1.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bline/coffeelint-loader.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ]
+}
