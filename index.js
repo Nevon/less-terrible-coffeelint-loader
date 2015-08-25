@@ -82,23 +82,12 @@ var checkSource = function (source, config) {
   delete config.failOnHint;
 
   // Custom reporter.
-  var reporter = config.reporter;
+  var reporter = (config.reporter) ? config.reporter : defaultReporter;
   delete config.reporter;
 
   var errors = linter(source, config);
   if (errors.length > 0) {
-    if (reporter) {
-      reporter.call(this, errors);
-    } else {
-      var emitter = emitErrors ? this.emitError : this.emitWarning;
-
-      if (emitter) {
-        emitter(defaultReporter(errors));
-      } else {
-        throw new Error('Your module system doesn\'t support emitWarning.' +
-          ' Update available? \n' + defaultReporter(errors));
-      }
-    }
+    reporter.call(this, errors, emitErrors);
 
     if (failOnHint && errors.length > 0) {
       throw new Error('Module failed because of coffeelint error.');
