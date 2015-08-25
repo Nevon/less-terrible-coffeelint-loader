@@ -58,9 +58,9 @@ By default, `less-terrible-coffeelint-loader` will provide a default reporter.
 
 However, if you prefer a custom reporter, pass a function under the `reporter` key in `coffeelint` options. (see *usage* above)
 
-The reporter function will be passed the array returned from `coffeelint.lint`:
+The reporter function will be passed the array returned from `coffeelint.lint` as well as a boolean indicating whether you should `emitError` or `emitWarning`:
 ```js
-[
+reporter.call(this, [
     {
         rule :      'Name of the violated rule',
         lineNumber: 'Number of the line that caused the violation',
@@ -68,7 +68,7 @@ The reporter function will be passed the array returned from `coffeelint.lint`:
         message:    'Information about the violated rule',
         context:    'Optional details about why the rule was violated'
     }
-]
+], true); // emitErrors
 ```
 
 The reporter function will be excuted with the loader context as `this`. You may emit messages using `this.emitWarning(...)` or `this.emitError(...)`. See [webpack docs on loader context](http://webpack.github.io/docs/loaders.html#loader-context).
