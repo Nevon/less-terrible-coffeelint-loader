@@ -21,7 +21,7 @@ var extend = function (obj) {
   return obj;
 };
 
-var rcFinder = new RcFinder('.coffeelint.json', {
+var rcFinder = new RcFinder('coffeelint.json', {
   loader: function (rcpath) {
     return rcpath;
   }
@@ -76,8 +76,6 @@ var checkSource = function (source, config) {
   extend(config, query);
 
   // Move flags.
-  var emitErrors = config.emitErrors;
-  delete config.emitErrors;
   var failOnHint = config.failOnHint;
   delete config.failOnHint;
 
@@ -87,7 +85,7 @@ var checkSource = function (source, config) {
 
   var errors = linter(source, config);
   if (errors.length > 0) {
-    reporter.call(this, errors, emitErrors);
+    reporter.call(this, errors);
 
     if (failOnHint && errors.length > 0) {
       throw new Error('Module failed because of coffeelint error.');
