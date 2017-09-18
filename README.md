@@ -26,10 +26,6 @@ module.exports = {
 		// i. e.
 		camel_case_classes: 'error',
 
-		// coffeelint errors are displayed by default as warnings
-		// set emitErrors to true to display them as errors
-		emitErrors: false,
-
 		// coffeelint to not interrupt the compilation
 		// if you want any file with coffeelint errors to fail
 		// set failOnErrors to true
