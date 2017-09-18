@@ -21,7 +21,13 @@ var extend = function (obj) {
   return obj;
 };
 
-var rcFinder = new RcFinder('.coffeelint.json', {
+var rcFinder1 = new RcFinder('.coffeelint.json', {
+  loader: function (rcpath) {
+    return rcpath;
+  }
+});
+
+var rcFinder2 = new RcFinder('coffeelint.json', {
   loader: function (rcpath) {
     return rcpath;
   }
@@ -29,7 +35,11 @@ var rcFinder = new RcFinder('.coffeelint.json', {
 
 var loadConfigSync = function () {
   var folder = path.dirname(this.resourcePath);
-  var rcpath = rcFinder.find(folder);
+  var rcFinders = [rcFinder1, rcFinder2];
+  var rcpath;
+  while (rcFinders.length && typeof rcpath !== 'string') {
+    rcpath = rcFinders.shift().find(folder);
+  }
   if (typeof rcpath !== 'string') {
     // No .coffeelint.json found.
     return {};
@@ -42,9 +52,13 @@ var loadConfigSync = function () {
 
 var loadConfigAsync = function (callback) {
   var folder = path.dirname(this.resourcePath);
-  rcFinder.find(folder, function (err, rcpath) {
+  var rcFinders = [rcFinder1, rcFinder2];
+  var rcFinderCallback = function (err, rcpath) {
     if (typeof rcpath !== 'string') {
       // No .coffeelint.json found.
+      if (rcFinders.length) {
+        return rcFinders.shift().find(folder, rcFinderCallback);
+      }
       return callback(null, {});
     }
 
@@ -62,7 +76,8 @@ var loadConfigAsync = function (callback) {
       }
       callback(err, options);
     });
-  }.bind(this));
+  }.bind(this);
+  rcFinders.shift().find(folder, rcFinderCallback);
 };
 
 
@@ -76,8 +91,6 @@ var checkSource = function (source, config) {
   extend(config, query);
 
   // Move flags.
-  var emitErrors = config.emitErrors;
-  delete config.emitErrors;
   var failOnHint = config.failOnHint;
   delete config.failOnHint;
 
@@ -87,7 +100,7 @@ var checkSource = function (source, config) {
 
   var errors = linter(source, config);
   if (errors.length > 0) {
-    reporter.call(this, errors, emitErrors);
+    reporter.call(this, errors);
 
     if (failOnHint && errors.length > 0) {
       throw new Error('Module failed because of coffeelint error.');
