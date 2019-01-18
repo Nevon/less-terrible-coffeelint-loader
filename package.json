@@ -1,6 +1,6 @@
 {
   "name": "less-terrible-coffeelint-loader",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Tommy Brunn <tommy.brunn@gmail.com",
   "description": "Coffeelint loader module for webpack",
   "dependencies": {
