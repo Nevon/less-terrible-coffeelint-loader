@@ -83,7 +83,7 @@ var loadConfigAsync = function (callback) {
 
 var checkSource = function (source, config) {
   // Copy options to own object.
-  var options = this.options.coffeelint;
+  var options = (this.options && this.options.coffeelint) || {};
   extend(config, options);
 
   // Copy query to own object.
