@@ -1,5 +1,8 @@
 # Less Terrible Coffeelint Loader
 
+> ## Maintainers wanted!
+> I am no longer using this in production, and offer no support. If anyone is interested in taking over the project, please open an issue.
+
 This was originally a fork of [coffeelint-loader](https://github.com/bline/coffeelint-loader), but it had some deficiencies. When I tried to fix them, I ended up replacing the whole thing.
 
 I'm using this for an internal project at the company I work for, so don't expect this to work in the general case. While it may technically have support for some features, I have not tested all of them. PRs are welcome, however.
